@@ -10,6 +10,8 @@ var replaceList = [
     'src/index.js',
     'src/vue-component.vue',
     'test/vue-component.spec.js',
+    'index.html',
+    'index.js',
     'package.json',
     'webpack.base.config.js',
     'webpack.prod.config.js',

@@ -6,7 +6,7 @@
     export default {
         data() {
             return {
-                text: 'Hello ${name}'
+                text: 'Hello Vue-Component'
             };
         }
     };

@@ -4,9 +4,12 @@
 var webpack = require('webpack');
 var config = require('./webpack.base.config');
 
-config.output.filename = '${name}.min.js';
-config.output.library = '${name}';
-config.output.libraryTarget = 'umd';
+config.entry = './src/index.js';
+config.output = {
+    filename: '${name}.min.js',
+    library: '${name}',
+    libraryTarget: 'umd'
+};
 
 config.plugins = (config.plugins || []).concat([
     new webpack.optimize.UglifyJsPlugin({
