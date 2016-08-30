@@ -1,0 +1,19 @@
+{
+  "name": "vue-component-generator",
+  "version": "0.0.1",
+  "description": "A generator for vue component",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "vcg": "./index.js"
+  },
+  "author": "lakb248@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "camel-case": "^3.0.0",
+    "commander": "^2.9.0",
+    "fs-extra": "^0.30.0",
+    "lodash.template": "^4.4.0"
+  }
+}
