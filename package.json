@@ -2,11 +2,15 @@
   "name": "vue-component-generator",
   "version": "0.0.1",
   "description": "A generator for vue component",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "bin": {
     "vcg": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lakb248/vue-component-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/lakb248/vue-component-generator/issues"
   },
   "author": "lakb248@gmail.com",
   "license": "ISC",
