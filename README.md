@@ -32,6 +32,12 @@ npm install
 npm run dev
 ```
 
+### Run test
+
+```bash
+npm run test
+```
+
 ### Build Component
 ```bash
 npm run build
