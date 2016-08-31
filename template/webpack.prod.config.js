@@ -3,11 +3,13 @@
  */
 var webpack = require('webpack');
 var config = require('./webpack.base.config');
+var path = require('path');
 
 config.entry = './src/index.js';
 config.output = {
+    path: path.resolve('dist') + '/',
     filename: '${name}.min.js',
-    library: '${name}',
+    library: '${bigName}',
     libraryTarget: 'umd'
 };
 

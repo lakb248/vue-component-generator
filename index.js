@@ -6,6 +6,10 @@ var fse = require('fs-extra');
 var camelCase = require('camel-case')
 var path = require('path');
 
+
+var dest = path.resolve('.');
+var source = __dirname + '/template';
+
 var replaceList = [
     'src/index.js',
     'src/vue-component.vue',
@@ -17,27 +21,29 @@ var replaceList = [
     'webpack.prod.config.js',
     'README.md'
 ];
-var dest = path.resolve('.');
-var source = __dirname + '/template';
+var renameList = [
+    'src/vue-component.vue',
+    'test/vue-component.spec.js'
+];
 
 var generateCommponent = function (name) {
     fse.copy(source, dest, function (err) {
         if (err) return console.error(err)
         console.log("Copy from template success!");
+
         replaceList.forEach(function (file) {
-            fse.readFile(source + '/' + file, function (err, data) {
-                var content = template(data)({
-                    name: name,
-                    bigName: camelCase(name)
-                });
-                fse.writeFile(dest + '/' + file, content, {flag : 'w'}, function (err) {
-                    if (err != null) {
-                        console.log(err);
-                    } else {
-                        console.log('generate ' + file + ' success!');
-                    }
-                });
+            var data = fse.readFileSync(source + '/' + file);
+            var content = template(data)({
+                name: name,
+                bigName: camelCase(name)
             });
+            fse.writeFileSync(dest + '/' + file, content, {flag : 'w'});
+            console.log('Generate ' + file + ' success!');
+        });
+        renameList.forEach(function (file) {
+            var newFile = file.replace('vue-component', name);
+            fse.rename(dest + '/' + file, dest + '/' + newFile);
+            console.log(newFile + ' create success!');
         });
     });
 };
