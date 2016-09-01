@@ -7,7 +7,6 @@ var camelCase = require('camel-case')
 var path = require('path');
 
 
-var dest = path.resolve('.');
 var source = __dirname + '/template';
 
 var replaceList = [
@@ -27,9 +26,12 @@ var renameList = [
 ];
 
 var generateCommponent = function (name) {
+    var dest = path.resolve('./' + name);
+    fse.mkdirsSync(dest);
+    console.log('Directory ' + dest + ' create success!');
     fse.copy(source, dest, function (err) {
         if (err) return console.error(err)
-        console.log("Copy from template success!");
+        console.log('Copy from template success!');
 
         replaceList.forEach(function (file) {
             var data = fse.readFileSync(source + '/' + file);
