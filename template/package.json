@@ -2,7 +2,7 @@
   "name": "${name}",
   "version": "0.0.1",
   "description": "a seed for vue component",
-  "main": "./dist/${name}.js",
+  "main": "./dist/${name}.min.js",
   "scripts": {
     "dev": "webpack-dashboard -p 3001 -- webpack-dev-server --watch --progress --config webpack.dev.config.js --port 8888",
     "build": "webpack --progress --config webpack.prod.config.js",
