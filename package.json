@@ -2,11 +2,11 @@
   "name": "vue-component-generator",
   "version": "0.0.2",
   "description": "A generator for vue component",
-  "keywords": {
+  "keywords": [
     "vue",
     "generator",
     "component"
-  },
+  ],
   "bin": {
     "vcg": "./index.js"
   },
