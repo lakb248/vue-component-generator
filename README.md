@@ -11,7 +11,7 @@ npm install vue-component-generator -g
 
 ### Init Component
 
-create a directory and run:
+Run command:
 ```bash
 vcg <component-name>
 ```
