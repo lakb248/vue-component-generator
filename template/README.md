@@ -1,2 +1,2 @@
 # ${name}
-${name} implement by vuejs
+> ${name} implement by vuejs
