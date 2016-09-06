@@ -1,6 +1,6 @@
 {
   "name": "vue-component-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A generator for vue component",
   "keywords": [
     "vue",
