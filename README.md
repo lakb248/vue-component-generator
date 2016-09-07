@@ -1,13 +1,14 @@
 # vue-component-generator
-A generator for vue component
+> A generator for vue component
 
-## Usage
 
-### Install
+## Install
 
 ```bash
 npm install vue-component-generator -g
 ```
+
+## Usage
 
 ### Init Component
 
@@ -26,7 +27,7 @@ vcg component-demo
 npm install
 ```
 
-### Start develop
+### Start development
 
 ```bash
 npm run dev
