@@ -4,7 +4,7 @@
   "description": "a seed for vue component",
   "main": "./dist/${name}.min.js",
   "scripts": {
-    "dev": "webpack-dashboard -p 3001 -- webpack-dev-server --watch --progress --config webpack.dev.config.js --port 8888",
+    "dev": "webpack-dashboard -p 3001 -- webpack-dev-server --watch --progress --config webpack.dev.config.js --port 8877",
     "build": "webpack --progress --config webpack.prod.config.js",
     "test": "karma start karma.config.js",
     "ci": "npm run test && npm run build"
@@ -53,6 +53,8 @@
     "vue-loader": "^9.5.1",
     "vue-style-loader": "^1.0.0",
     "webpack": "^2.1.0-beta.21",
+    "webpack-dev-middleware": "^1.8.1",
+    "webpack-hot-middleware": "^2.12.2",
     "webpack-dashboard": "^0.1.8",
     "webpack-dev-server": "^1.15.0",
     "webpack-merge": "^0.14.1"
