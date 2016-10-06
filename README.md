@@ -33,6 +33,8 @@ npm install
 npm run dev
 ```
 
+Open `localhost:8877` in your browser
+
 ### Run test
 
 ```bash
