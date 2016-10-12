@@ -6,6 +6,8 @@ var fse = require('fs-extra');
 var camelCase = require('camel-case')
 var path = require('path');
 
+var github = require('github-download');
+
 
 var source = __dirname + '/template';
 
@@ -29,25 +31,25 @@ var generateCommponent = function (name) {
     var dest = path.resolve('./' + name);
     fse.mkdirsSync(dest);
     console.log('Directory ' + dest + ' create success!');
-    fse.copy(source, dest, function (err) {
-        if (err) return console.error(err)
-        console.log('Copy from template success!');
-
-        replaceList.forEach(function (file) {
-            var data = fse.readFileSync(source + '/' + file);
-            var content = template(data)({
-                name: name,
-                bigName: camelCase(name)
+    console.log('Download from https://github.com/lakb248/vue-component-seed.git...');
+    github('https://github.com/lakb248/vue-component-seed.git', dest)
+        .on('end', function () {
+            console.log('Download complete!');
+            replaceList.forEach(function (file) {
+                var data = fse.readFileSync(dest + '/' + file);
+                var content = template(data)({
+                    name: name,
+                    bigName: camelCase(name)
+                });
+                fse.writeFileSync(dest + '/' + file, content, {flag : 'w'});
+                console.log('Generate ' + file + ' success!');
             });
-            fse.writeFileSync(dest + '/' + file, content, {flag : 'w'});
-            console.log('Generate ' + file + ' success!');
+            renameList.forEach(function (file) {
+                var newFile = file.replace('vue-component', name);
+                fse.rename(dest + '/' + file, dest + '/' + newFile);
+                console.log(newFile + ' create success!');
+            });
         });
-        renameList.forEach(function (file) {
-            var newFile = file.replace('vue-component', name);
-            fse.rename(dest + '/' + file, dest + '/' + newFile);
-            console.log(newFile + ' create success!');
-        });
-    });
 };
 
 program
@@ -57,3 +59,22 @@ program
         generateCommponent(name);
     })
     .parse(process.argv);
+//
+// var github = require('github-download');
+//
+// github('https://github.com/lakb248/vue-component-seed.git', './github')
+//     .on('dir', function (dir) {
+//         console.log(dir);
+//     })
+//     .on('file', function (file) {
+//         console.log(file);
+//     })
+//     .on('zip', function(zipUrl) { //only emitted if Github API limit is reached and the zip file is downloaded
+//         console.log(zipUrl)
+//     })
+//     .on('error', function(err) {
+//         console.error(err)
+//     })
+//     .on('end', function() {
+//         console.log('end');
+//     });
