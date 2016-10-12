@@ -27,19 +27,30 @@ var renameList = [
     'test/vue-component.spec.js'
 ];
 
-var generateCommponent = function (name) {
+var generateCommponent = function (name, options) {
     var dest = path.resolve('./' + name);
     fse.mkdirsSync(dest);
     console.log('Directory ' + dest + ' create success!');
-    console.log('Download from https://github.com/lakb248/vue-component-seed.git...');
-    github('https://github.com/lakb248/vue-component-seed.git', dest)
+    var repo = '';
+    if (options.next) {
+        repo = 'https://github.com/lakb248/vue-component-seed.git#vue2';
+    } else {
+        repo = 'https://github.com/lakb248/vue-component-seed.git';
+    }
+    var port = 8888;
+    if (options.port && !isNaN(+options.port)) {
+        port = options.port;
+    }
+    console.log('Download from ' + repo + '...');
+    github(repo, dest)
         .on('end', function () {
             console.log('Download complete!');
             replaceList.forEach(function (file) {
                 var data = fse.readFileSync(dest + '/' + file);
                 var content = template(data)({
                     name: name,
-                    bigName: camelCase(name)
+                    bigName: camelCase(name),
+                    port: port
                 });
                 fse.writeFileSync(dest + '/' + file, content, {flag : 'w'});
                 console.log('Generate ' + file + ' success!');
@@ -55,10 +66,11 @@ var generateCommponent = function (name) {
 program
     .arguments('<name>')
     .version('0.0.1')
-    .action(function(name) {
-        generateCommponent(name);
-    })
-    .parse(process.argv);
+    .option('-n, --next', 'Use vue2.0')
+    .option('-p, --port <port>', 'The port will be used by webpack-dev-server, default to 8888')
+    .action(generateCommponent);
+program.parse(process.argv);
+
 //
 // var github = require('github-download');
 //
