@@ -14,11 +14,13 @@ npm install vue-component-generator -g
 
 Run command:
 ```bash
-vcg <component-name>
+vcg <component-name> -p <port> -n
 ```
 .eg
 ```bash
-vcg component-demo
+vcg component-demo // generate a component named component-demo
+vcg component-demo -n // generate a component named component-demo with vue 2.0
+vcg component-demo -p 8989 // generate a component named component-demo and set the port to 8989, which webpack-dev-server listen to
 ```
 
 ### Install Depandencies
@@ -43,4 +45,3 @@ npm run test
 ```bash
 npm run build
 ```
-
