@@ -29,13 +29,13 @@ vcg component-demo -p 8989 // generate a component named component-demo and set 
 npm install
 ```
 
-### Start development
+### Start Development
 
 ```bash
 npm run dev
 ```
 
-### Run test
+### Run Test
 
 ```bash
 npm run test

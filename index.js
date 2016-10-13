@@ -5,11 +5,7 @@ var template = require('lodash.template');
 var fse = require('fs-extra');
 var camelCase = require('camel-case')
 var path = require('path');
-
 var github = require('github-download');
-
-
-var source = __dirname + '/template';
 
 var replaceList = [
     'src/index.js',
@@ -28,23 +24,28 @@ var renameList = [
 ];
 
 var generateCommponent = function (name, options) {
+    // create dest directory
     var dest = path.resolve('./' + name);
     fse.mkdirsSync(dest);
     console.log('Directory ' + dest + ' create success!');
+    // get repo url
     var repo = '';
     if (options.next) {
         repo = 'https://github.com/lakb248/vue-component-seed.git#vue2';
     } else {
         repo = 'https://github.com/lakb248/vue-component-seed.git';
     }
+    // get port
     var port = 8888;
     if (options.port && !isNaN(+options.port)) {
         port = options.port;
     }
     console.log('Download from ' + repo + '...');
+    // download project from github
     github(repo, dest)
         .on('end', function () {
             console.log('Download complete!');
+            // replace component name and port
             replaceList.forEach(function (file) {
                 var data = fse.readFileSync(dest + '/' + file);
                 var content = template(data)({
@@ -55,6 +56,7 @@ var generateCommponent = function (name, options) {
                 fse.writeFileSync(dest + '/' + file, content, {flag : 'w'});
                 console.log('Generate ' + file + ' success!');
             });
+            // rename component file
             renameList.forEach(function (file) {
                 var newFile = file.replace('vue-component', name);
                 fse.rename(dest + '/' + file, dest + '/' + newFile);
@@ -63,6 +65,7 @@ var generateCommponent = function (name, options) {
         });
 };
 
+// cli
 program
     .arguments('<name>')
     .version('0.0.1')
@@ -70,23 +73,3 @@ program
     .option('-p, --port <port>', 'The port will be used by webpack-dev-server, default to 8888')
     .action(generateCommponent);
 program.parse(process.argv);
-
-//
-// var github = require('github-download');
-//
-// github('https://github.com/lakb248/vue-component-seed.git', './github')
-//     .on('dir', function (dir) {
-//         console.log(dir);
-//     })
-//     .on('file', function (file) {
-//         console.log(file);
-//     })
-//     .on('zip', function(zipUrl) { //only emitted if Github API limit is reached and the zip file is downloaded
-//         console.log(zipUrl)
-//     })
-//     .on('error', function(err) {
-//         console.error(err)
-//     })
-//     .on('end', function() {
-//         console.log('end');
-//     });
