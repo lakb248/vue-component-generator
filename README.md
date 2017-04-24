@@ -1,5 +1,5 @@
 # vue-component-generator
-> A generator for vue component
+> A generator for vue component, support Vue1.X and Vue2.X
 
 
 ## Install
