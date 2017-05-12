@@ -23,7 +23,7 @@ vcg component-demo -n // generate a component named component-demo with vue 2.0
 vcg component-demo -p 8989 // generate a component named component-demo and set the port to 8989, which webpack-dev-server listen to
 ```
 
-### Install Depandencies
+### Install Dependencies
 
 ```bash
 npm install
